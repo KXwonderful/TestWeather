@@ -1,5 +1,6 @@
-package com.kxwon.bingweather;
+package com.kxwon.bingweather.ui.activity;
 
+import com.kxwon.bingweather.R;
 import com.kxwon.bingweather.base.BaseActivity;
 
 public class MainActivity extends BaseActivity {

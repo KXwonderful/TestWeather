@@ -3,7 +3,6 @@ package com.kxwon.bingweather.base;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.WindowManager;
@@ -38,13 +37,13 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected abstract void initData();
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(initLayoutId());
 
         mBinder = ButterKnife.bind(this);
 
-        ClearStatusBar();
+        //ClearStatusBar();
 
         initData();
 
