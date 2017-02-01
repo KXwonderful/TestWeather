@@ -1,5 +1,6 @@
 package com.kxwon.bingweather.ui.activity;
 
+import android.content.Intent;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -17,6 +18,7 @@ import com.kxwon.bingweather.base.BaseActivity;
 import com.kxwon.bingweather.common.Constant;
 import com.kxwon.bingweather.gson.Forecast;
 import com.kxwon.bingweather.gson.Weather;
+import com.kxwon.bingweather.service.AutoUpdateService;
 import com.kxwon.bingweather.utils.HttpUtils;
 import com.kxwon.bingweather.utils.PrefUtils;
 import com.kxwon.bingweather.utils.ToastUtils;
@@ -221,6 +223,10 @@ public class WeatherActivity extends BaseActivity {
         tvSport.setText(sport);
 
         svWeatherLayout.setVisibility(View.VISIBLE);
+
+        // 开启服务
+        Intent intent = new Intent(this, AutoUpdateService.class);
+        startService(intent);
 
     }
 
