@@ -2,9 +2,11 @@ package com.kxwon.bingweather.utils;
 
 import android.text.TextUtils;
 
+import com.google.gson.Gson;
 import com.kxwon.bingweather.db.City;
 import com.kxwon.bingweather.db.County;
 import com.kxwon.bingweather.db.Province;
+import com.kxwon.bingweather.gson.Weather;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -32,6 +34,7 @@ public class Utility {
                     province.setProvinceCode(provinceObject.getInt("id"));
                     province.save();
                 }
+                return true;
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -54,6 +57,7 @@ public class Utility {
                     city.setProvinceId(provinceId);
                     city.save();
                 }
+                return true;
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -76,10 +80,26 @@ public class Utility {
                     county.setCityId(cityId);
                     county.save();
                 }
+                return true;
             } catch (JSONException e) {
                 e.printStackTrace();
             }
         }
         return false;
+    }
+
+    /**
+     * 将返回的 JSON 数据解析成 Weather 实体类
+     */
+    public static Weather handleWeatherReponse(String response){
+        try {
+            JSONObject jsonObject = new JSONObject(response);
+            JSONArray jsonArray = jsonObject.getJSONArray("HeWeather");
+            String weatherContent = jsonArray.getJSONObject(0).toString();
+            return new Gson().fromJson(weatherContent,Weather.class);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

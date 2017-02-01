@@ -1,6 +1,7 @@
 package com.kxwon.bingweather.ui.fragment;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -15,6 +16,7 @@ import com.kxwon.bingweather.common.Constant;
 import com.kxwon.bingweather.db.City;
 import com.kxwon.bingweather.db.County;
 import com.kxwon.bingweather.db.Province;
+import com.kxwon.bingweather.ui.activity.WeatherActivity;
 import com.kxwon.bingweather.utils.HttpUtils;
 import com.kxwon.bingweather.utils.ToastUtils;
 import com.kxwon.bingweather.utils.Utility;
@@ -87,6 +89,12 @@ public class ChooseAreaFragment extends BaseFragment {
                 }else if (currentLevel == Constant.LEVEL_CITY){
                     selectedCity = cityList.get(i);
                     queryCounties();
+                }else if (currentLevel == Constant.LEVEL_COUNTY){
+                    String weatherId = countyList.get(i).getWeatherId();
+                    Intent intent = new Intent(getActivity(), WeatherActivity.class);
+                    intent.putExtra(Constant.WEATHER_ID,weatherId);
+                    startActivity(intent);
+                    getActivity().finish();
                 }
             }
         });
@@ -119,7 +127,7 @@ public class ChooseAreaFragment extends BaseFragment {
             lvSelectArea.setSelection(0);
             currentLevel = Constant.LEVEL_PROVINCE;
         }else {
-            String address = Constant.ADDRESS_COUNTRY;
+            String address = Constant.URL_ADDRESS_BASE;
             queryFromServer(address,"province");
         }
 
@@ -142,7 +150,7 @@ public class ChooseAreaFragment extends BaseFragment {
             currentLevel = Constant.LEVEL_CITY;
         }else {
             int provinceCode = selectedProvince.getProvinceCode();
-            String address = Constant.ADDRESS_COUNTRY + "/" + provinceCode;
+            String address = Constant.URL_ADDRESS_BASE + "/" + provinceCode;
             queryFromServer(address,"city");
         }
     }
@@ -165,7 +173,7 @@ public class ChooseAreaFragment extends BaseFragment {
         }else {
             int provinceCode = selectedProvince.getProvinceCode();
             int cityCode = selectedCity.getCityCode();
-            String address = Constant.ADDRESS_COUNTRY + "/" +  provinceCode + "/" + cityCode;
+            String address = Constant.URL_ADDRESS_BASE + "/" +  provinceCode + "/" + cityCode;
             queryFromServer(address,"county");
         }
 

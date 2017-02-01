@@ -2,4 +2,14 @@
     <string name="app_name">BingWeather</string>
 
     <string name="title">标题</string>
+
+    <string name="text_forecast">预报</string>
+
+    <string name="text_air_quality">空气质量</string>
+
+    <string name="text_aqi">AQI 指数</string>
+
+    <string name="text_pm25">PM2.5 指数</string>
+
+    <string name="text_suggestion">生活建议</string>
 </resources>
