@@ -43,7 +43,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 
         mBinder = ButterKnife.bind(this);
 
-        //ClearStatusBar();
+        ClearStatusBar();
 
         initData();
 

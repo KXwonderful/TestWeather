@@ -16,6 +16,7 @@ import com.kxwon.bingweather.common.Constant;
 import com.kxwon.bingweather.db.City;
 import com.kxwon.bingweather.db.County;
 import com.kxwon.bingweather.db.Province;
+import com.kxwon.bingweather.ui.activity.MainActivity;
 import com.kxwon.bingweather.ui.activity.WeatherActivity;
 import com.kxwon.bingweather.utils.HttpUtils;
 import com.kxwon.bingweather.utils.ToastUtils;
@@ -91,10 +92,19 @@ public class ChooseAreaFragment extends BaseFragment {
                     queryCounties();
                 }else if (currentLevel == Constant.LEVEL_COUNTY){
                     String weatherId = countyList.get(i).getWeatherId();
-                    Intent intent = new Intent(getActivity(), WeatherActivity.class);
-                    intent.putExtra(Constant.WEATHER_ID,weatherId);
-                    startActivity(intent);
-                    getActivity().finish();
+                    // 判断碎片是在哪个activity中
+                    if (getActivity() instanceof MainActivity){
+                        Intent intent = new Intent(getActivity(), WeatherActivity.class);
+                        intent.putExtra(Constant.WEATHER_ID,weatherId);
+                        startActivity(intent);
+                        getActivity().finish();
+                    }else if (getActivity() instanceof WeatherActivity){
+                        WeatherActivity activity = (WeatherActivity) getActivity();
+                        activity.drawerLayout.closeDrawers();
+                        activity.swipeRefresh.setRefreshing(true);
+                        activity.requestWeather(weatherId);
+                    }
+
                 }
             }
         });

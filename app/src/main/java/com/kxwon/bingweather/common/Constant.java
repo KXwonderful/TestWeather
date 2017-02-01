@@ -9,7 +9,8 @@ package com.kxwon.bingweather.common;
 public class Constant {
 
     public class Pref{
-        public static final String WEATHER = "weather";
+        public static final String WEATHER = "weather";// 天气
+        public static final String BRING_PIC = "bing_pic";// 必应图片
     }
 
     // 省市县
@@ -19,6 +20,9 @@ public class Constant {
 
     // 获取地区url
     public static final String URL_ADDRESS_BASE = "http://guolin.tech/api/china";
+
+    // 获取必应每日一图url
+    public static final String URL_BEING_PIC = "http://guolin.tech/api/bing_pic";
 
     // 获取天气url
     public static final String URL_WEATHER_BASE = "http://guolin.tech/api/weather?cityid=";

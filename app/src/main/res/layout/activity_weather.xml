@@ -4,35 +4,68 @@
     android:layout_height="match_parent"
     android:background="@color/colorPrimary">
 
-    <ScrollView
-        android:id="@+id/sv_weather_layout"
+    <!--*********** 背景图 ***********-->
+    <ImageView
+        android:id="@+id/iv_bing_pic"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scrollbars="none"
-        android:overScrollMode="never">
+        android:scaleType="centerCrop"/>
 
-        <LinearLayout
+    <android.support.v4.widget.DrawerLayout
+        android:id="@+id/drawer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!--******** 第一个子控件 主屏幕显示 ********-->
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/swipe_refresh"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="match_parent">
 
-            <!--********* 头布局 ***********-->
-            <include layout="@layout/title"/>
+            <ScrollView
+                android:id="@+id/sv_weather_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scrollbars="none"
+                android:overScrollMode="never">
 
-            <!--****** 当前天气信息 *********-->
-            <include layout="@layout/now"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:fitsSystemWindows="true">
 
-            <!--****** 未来天气信息 *********-->
-            <include layout="@layout/forecast"/>
+                    <!--********* 头布局 ***********-->
+                    <include layout="@layout/title"/>
 
-            <!--****** 空气质量信息 *********-->
-            <include layout="@layout/aqi"/>
+                    <!--****** 当前天气信息 *********-->
+                    <include layout="@layout/now"/>
 
-            <!--****** 生活建议信息 *********-->
-            <include layout="@layout/suggestion"/>
+                    <!--****** 未来天气信息 *********-->
+                    <include layout="@layout/forecast"/>
 
-        </LinearLayout>
+                    <!--****** 空气质量信息 *********-->
+                    <include layout="@layout/aqi"/>
 
-    </ScrollView>
+                    <!--****** 生活建议信息 *********-->
+                    <include layout="@layout/suggestion"/>
+
+                </LinearLayout>
+
+            </ScrollView>
+
+        </android.support.v4.widget.SwipeRefreshLayout>
+
+        <!--******** 第二个子控件 滑动菜单显示 ********-->
+        <fragment
+            android:id="@+id/fg_choose_area"
+            android:name="com.kxwon.bingweather.ui.fragment.ChooseAreaFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"/>
+
+    </android.support.v4.widget.DrawerLayout>
+
+
 
 </FrameLayout>
